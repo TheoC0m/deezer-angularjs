@@ -1,4 +1,4 @@
-var app = angular.module('DeezerAngularJS', ['ngRoute', 'ngMaterial']);
+var app = angular.module('PocketAngularJS', ['ngRoute', 'ngMaterial']);
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider

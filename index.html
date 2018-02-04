@@ -12,8 +12,11 @@
 	<script src="node_modules/angular-messages/angular-messages.min.js"></script>
 	<script src="node_modules/angular-material/angular-material.min.js"></script>
 	<script src="app/app.js"></script>
+	<script src="app/pocket/pocket.factory.js"></script>
+		<script src="app/pocket/pocket.service.js"></script>
 	<script src="app/home/home.controller.js"></script>
 	<script src="app/nav/nav.controller.js"></script>
+
 
 	<link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css" />
 	<link rel="stylesheet" href="assets/css/custom.css" />
@@ -22,7 +25,7 @@
 
 </head>
 
-<body ng-app="DeezerAngularJS">
+<body ng-app="PocketAngularJS">
 
 	<div ng-controller="NavController as ctrl" layout="column" ng-cloak>
 
@@ -34,11 +37,13 @@
 
 
 
-				<h1 md-troncate>The WiW Deezer</h1>
+				<h1 md-troncate>The WiW Pocket</h1>
 				<div flex></div>
 
-					<md-button class="md-raised md-primary">Connect to Deezer</md-button>
+				</span ng-controller="DeezerFactory as ctrl">
 
+				<md-button class="md-raised md-primary" ng-click="connectPocket()">Login with Pocket</md-button>
+				</span>
 
 			</div>
 		</md-toolbar>
@@ -53,14 +58,14 @@
 
 						<span flex></span>
 
-						<md-button hide-gt-xs class="md-icon-button" aria-label="Close" ng-click="toggleLeft()">
+						<md-button hide-gt-xs class="md-icon-button" aria-label="Close" ng-click="closeSideNav()">
 							<md-icon md-svg-icon="assets/images/ic_close_white_24px.svg"></md-icon>
 						</md-button>
 					</div>
 				</md-toolbar>
 
-				<md-content layout-padding ng-controller="LeftCtrl">
-					<md-button ng-click="close()" class="md-primary" hide-gt-md>
+				<md-content layout-padding>
+					<md-button ng-click="closeSideNav()" class="md-primary" hide-gt-md>
 						Close Sidenav Left
 					</md-button>
 					<p hide show-gt-md>
@@ -72,7 +77,7 @@
 
 			<md-content flex layout-padding>
 
-				<div  layout="column" layout-sm="column" layout-align="center stretch" layout-wrap>
+				<div layout="column" layout-sm="column" layout-align="center stretch" layout-wrap>
 
 
 					<ng-view></ng-view>
