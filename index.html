@@ -34,7 +34,10 @@
 
 
 
-				<h1><span>The WiW Deezer</span></h1>
+				<h1 md-troncate>The WiW Deezer</h1>
+				<div flex></div>
+
+					<md-button class="md-raised md-primary">Connect to Deezer</md-button>
 
 
 			</div>
@@ -44,7 +47,7 @@
 
 			<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
 
-				<md-toolbar class="md-theme-indigo">
+				<md-toolbar>
 					<div class="md-toolbar-tools">
 						<h2 md-truncate flex>Sidenav Left</h2>
 
@@ -69,26 +72,16 @@
 
 			<md-content flex layout-padding>
 
-				<div layout="column" layout-align="top center">
-					<!-- <p>
-						The left sidenav will 'lock open' on a medium (>=960px wide) device.
-					</p>
-					<p>
-						The right sidenav will focus on a specific child element.
-					</p> -->
+				<div  layout="column" layout-sm="column" layout-align="center stretch" layout-wrap>
+
 
 					<ng-view></ng-view>
 
 
-					<div>
-						<md-button ng-click="toggleLeft()" class="md-primary" hide-gt-md>
-							Toggle left
-						</md-button>
-					</div>
 
 				</div>
 
-				<div flex></div>
+
 
 			</md-content>
 
