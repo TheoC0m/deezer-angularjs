@@ -1,6 +1,6 @@
-angular.module('PocketAngularJS')
-	.controller('NavController', ['$scope', '$location', '$timeout', '$mdSidenav', '$log', 'PocketFactory',
-		function($scope, $location, $timeout, $mdSidenav, $log, PocketFactory) {
+angular.module('DeezerAngularJS')
+	.controller('MainController', ['$scope', '$location', '$routeParams', '$timeout', '$mdSidenav', '$log', 'DeezerService',
+		function($scope, $location, $routeParams, $timeout, $mdSidenav, $log, DeezerService) {
 
 			$scope.toggleLeft = buildDelayedToggler('left');
 
@@ -13,8 +13,8 @@ angular.module('PocketAngularJS')
 
 			};
 
-			$scope.connectPocket = function() {
-				PocketFactory.connectPocket();
+			$scope.deezerLogin = function() {
+				DeezerService.deezerLogin();
 			}
 
 
@@ -43,8 +43,6 @@ angular.module('PocketAngularJS')
 					}, wait || 10);
 				};
 			}
-
-
 
 
 

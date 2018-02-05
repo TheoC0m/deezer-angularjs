@@ -3,6 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
+	<base href="http://127.0.0.1/pocket-angularjs/">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 	<title>The WiW - Deezer AngularJS</title>
 	<script src="node_modules/angular/angular.js"></script>
@@ -12,10 +13,9 @@
 	<script src="node_modules/angular-messages/angular-messages.min.js"></script>
 	<script src="node_modules/angular-material/angular-material.min.js"></script>
 	<script src="app/app.js"></script>
-	<script src="app/pocket/pocket.factory.js"></script>
-		<script src="app/pocket/pocket.service.js"></script>
+	<script src="app/deezer/deezer.service.js"></script>
 	<script src="app/home/home.controller.js"></script>
-	<script src="app/nav/nav.controller.js"></script>
+	<script src="app/main/main.controller.js"></script>
 
 
 	<link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css" />
@@ -25,9 +25,9 @@
 
 </head>
 
-<body ng-app="PocketAngularJS">
+<body ng-app="DeezerAngularJS">
 
-	<div ng-controller="NavController as ctrl" layout="column" ng-cloak>
+	<div ng-controller="MainController as ctrl" layout="column" ng-cloak>
 
 		<md-toolbar>
 			<div class="md-toolbar-tools">
@@ -37,12 +37,12 @@
 
 
 
-				<h1 md-troncate>The WiW Pocket</h1>
+				<h1 md-troncate>The WiW Deezer</h1>
 				<div flex></div>
 
 				</span ng-controller="DeezerFactory as ctrl">
 
-				<md-button class="md-raised md-primary" ng-click="connectPocket()">Login with Pocket</md-button>
+				<md-button class="md-raised md-primary" ng-click="deezerLogin()">Login with Deezer</md-button>
 				</span>
 
 			</div>
