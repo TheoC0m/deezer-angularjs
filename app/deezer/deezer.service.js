@@ -33,7 +33,7 @@ angular.module("DeezerAngularJS")
 			console.log("deezerservice storeToken connected : " +service.isConnected());
 
 			//add the access token to every http requests header
-		//	$http.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('deezer-access_token');
+		$http.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('deezer-access_token');
 		}
 
 		service.deezerLogout = function(){
