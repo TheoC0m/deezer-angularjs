@@ -2,6 +2,22 @@ angular.module('DeezerAngularJS')
 	.controller('MainController', ['$scope', '$location', '$routeParams', '$timeout', '$mdSidenav', '$log', 'DeezerService',
 		function($scope, $location, $routeParams, $timeout, $mdSidenav, $log, DeezerService) {
 
+
+
+			$scope.connected = DeezerService.isConnected();
+
+			$scope.deezerLogin = function() {
+				DeezerService.deezerLogin();
+				$scope.connected = DeezerService.isConnected();
+				console.log("nav afeter login click connected : " + $scope.connected);
+			}
+			$scope.deezerLogout = function() {
+				DeezerService.deezerLogout();
+				$scope.connected = DeezerService.isConnected();
+				console.log("nav after logout click connected : : " + $scope.connected);
+			}
+
+
 			$scope.toggleLeft = buildDelayedToggler('left');
 
 			$scope.closeSideNav = function() {
@@ -12,12 +28,6 @@ angular.module('DeezerAngularJS')
 					});
 
 			};
-
-			$scope.deezerLogin = function() {
-				DeezerService.deezerLogin();
-			}
-
-
 
 			function buildDelayedToggler(navID) {
 				return debounce(function() {
@@ -44,6 +54,17 @@ angular.module('DeezerAngularJS')
 				};
 			}
 
+			$scope.start = function() {
+				//if current url has an hash with access_token
+				if ($location.hash().startsWith("access_token=")) {
+					DeezerService.storeToken($location.hash());
+					console.log("main start : " + DeezerService.isConnected());
+					$scope.connected = DeezerService.isConnected();
+				}
+
+			}
+
+			$scope.start();
 
 
 

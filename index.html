@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<base href="http://127.0.0.1/pocket-angularjs/">
+	<base href="http://127.0.0.1/deezer-angularjs/">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 	<title>The WiW - Deezer AngularJS</title>
 	<script src="node_modules/angular/angular.js"></script>
@@ -42,7 +42,8 @@
 
 				</span ng-controller="DeezerFactory as ctrl">
 
-				<md-button class="md-raised md-primary" ng-click="deezerLogin()">Login with Deezer</md-button>
+				<md-button ng-hide="connected" class="md-raised md-primary" ng-click="deezerLogin()">Login with Deezer</md-button>
+				<md-button ng-show="connected" class="md-raised md-primary" ng-click="deezerLogout()">Logout Deezer</md-button>
 				</span>
 
 			</div>
