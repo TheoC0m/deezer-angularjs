@@ -1,6 +1,6 @@
 angular.module('DeezerAngularJS')
-	.controller('HomeController', ['$scope', '$location', '$routeParams', '$mdDialog', 'DeezerService',
-		function($scope, $location, $routeParams, $mdDialog, DeezerService) {
+	.controller('HomeController', ['$scope', '$location', '$routeParams', '$mdDialog', 'DeezerService', 'UserFactory',
+		function($scope, $location, $routeParams, $mdDialog, DeezerService, UserFactory) {
 
 
 
@@ -24,7 +24,9 @@ angular.module('DeezerAngularJS')
 						.ariaLabel('Alert Dialog')
 						.ok('Got it!')
 					);
-				} 
+				}
+
+						var user = UserFactory.get({id:'me'});
 			}
 
 			$scope.start();

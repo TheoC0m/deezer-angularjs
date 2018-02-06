@@ -9,7 +9,10 @@ angular.module("DeezerAngularJS")
 
 		service.permissions = "basic_access,email,offline_access,manage_library,manage_community,delete_library,listening_history";
 
+		service.apiUrl = "https://api.deezer.com";
+
 		service.isConnected = function(){
+			//if the access_token exists in localstorage then the user is connectde
 			return (!(typeof localStorage.getItem('deezer-access_token') === 'undefined' || localStorage.getItem('deezer-access_token') === null)) ;
 		}
 
@@ -28,6 +31,9 @@ angular.module("DeezerAngularJS")
 			console.log(access_token);
 			localStorage.setItem('deezer-access_token', access_token);
 			console.log("deezerservice storeToken connected : " +service.isConnected());
+
+			//add the access token to every http requests header
+		//	$http.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('deezer-access_token');
 		}
 
 		service.deezerLogout = function(){
