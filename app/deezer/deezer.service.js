@@ -9,7 +9,7 @@ angular.module("DeezerAngularJS")
 
 		service.permissions = "basic_access,email,offline_access,manage_library,manage_community,delete_library,listening_history";
 
-		service.apiUrl = "https://api.deezer.com";
+		service.apiUrl = "https://cors-anywhere.herokuapp.com/https://api.deezer.com";
 
 		service.isConnected = function(){
 			//if the access_token exists in localstorage then the user is connectde

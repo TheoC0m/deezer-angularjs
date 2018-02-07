@@ -1,6 +1,6 @@
 angular.module('DeezerAngularJS')
-	.controller('HomeController', ['$scope', '$location', '$routeParams', '$mdDialog', 'DeezerService', 'UserFactory',
-		function($scope, $location, $routeParams, $mdDialog, DeezerService, UserFactory) {
+	.controller('HomeController', ['$scope', '$location', '$routeParams', '$mdDialog', 'DeezerService', 'UserService',
+		function($scope, $location, $routeParams, $mdDialog, DeezerService, UserService) {
 
 
 
@@ -26,7 +26,7 @@ angular.module('DeezerAngularJS')
 					);
 				}
 
-						var user = UserFactory.get({id:'me'});
+					
 			}
 
 			$scope.start();

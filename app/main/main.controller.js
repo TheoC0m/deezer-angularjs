@@ -1,6 +1,6 @@
 angular.module('DeezerAngularJS')
-	.controller('MainController', ['$scope', '$location', '$routeParams', '$timeout', '$mdSidenav', '$log', 'DeezerService',
-		function($scope, $location, $routeParams, $timeout, $mdSidenav, $log, DeezerService) {
+	.controller('MainController', ['$scope', '$location', '$routeParams', '$timeout', '$mdSidenav', '$log', 'DeezerService', 'UserService',
+		function($scope, $location, $routeParams, $timeout, $mdSidenav, $log, DeezerService, UserService) {
 
 
 
@@ -60,6 +60,13 @@ angular.module('DeezerAngularJS')
 					DeezerService.storeToken($location.hash());
 					console.log("main start : " + DeezerService.isConnected());
 					$scope.connected = DeezerService.isConnected();
+					// store user informations for an easyer access (only one request needed)
+			 //UserService.getMe();
+
+					localStorage.setItem('deezer-user_infos', UserService.getMe());
+
+					console.log("-------")
+					console.log(localStorage.getItem('deezer-user_infos').id)
 				}
 
 			}
