@@ -10,9 +10,9 @@ angular.module("DeezerAngularJS")
 				})
 				.then(function(response) {
 
-					console.log(response);
+					//console.log(response);
 					var data = response.data;
-					console.log(data);
+					//console.log(data);
 					return data;
 				})
 				.catch(function() {

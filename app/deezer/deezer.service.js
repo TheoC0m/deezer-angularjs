@@ -38,6 +38,7 @@ angular.module("DeezerAngularJS")
 
 		service.deezerLogout = function(){
 			localStorage.removeItem('deezer-access_token');
+			localStorage.removeItem('deezer-user_infos');
 			console.log("deezerservice logout connected : " +service.isConnected());
 		}
 

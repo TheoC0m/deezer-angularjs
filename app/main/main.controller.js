@@ -4,7 +4,6 @@ angular.module('DeezerAngularJS')
 
 
 
-			$scope.connected = DeezerService.isConnected();
 
 			$scope.deezerLogin = function() {
 				DeezerService.deezerLogin();
@@ -54,21 +53,43 @@ angular.module('DeezerAngularJS')
 				};
 			}
 
+
+			$scope.afterLogin = function() {
+
+				//store token
+				DeezerService.storeToken($location.hash());
+				console.log("main start : " + DeezerService.isConnected());
+				//update connected var (change login button to logout button and other ui stuff)
+				$scope.connected = DeezerService.isConnected();
+
+				// store user informations for an easyer access  everywhere (only one request needed)
+				$scope.storeMe()
+
+			}
+
+			$scope.storeMe = function() {
+				UserService.getMe()
+					.then(function(response) {
+						if (response != undefined) {
+							$scope.userInfos = response;
+							console.log($scope.userInfos);
+							localStorage.setItem('deezer-user_infos', angular.toJson(response));
+						}
+
+					})
+			}
+
 			$scope.start = function() {
+
+				$scope.connected = DeezerService.isConnected();
+				$scope.userInfos;
+
 				//if current url has an hash with access_token
 				if ($location.hash().startsWith("access_token=")) {
-					DeezerService.storeToken($location.hash());
-					console.log("main start : " + DeezerService.isConnected());
-					$scope.connected = DeezerService.isConnected();
-					// store user informations for an easyer access (only one request needed)
-			 //UserService.getMe();
-
-					localStorage.setItem('deezer-user_infos', UserService.getMe());
-
-					console.log("-------")
-					console.log(localStorage.getItem('deezer-user_infos').id)
+					$scope.afterLogin
+					// clear url
+					$location.url($location.path('/'));
 				}
-
 			}
 
 			$scope.start();

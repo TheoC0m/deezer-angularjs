@@ -11,7 +11,7 @@ angular.module('DeezerAngularJS')
 			$scope.start = function() {
 				console.log("start");
 				console.log("home start connected : " + DeezerService.isConnected());
-				console.log($routeParams);
+				//console.log($routeParams);
 
 				if ($routeParams.error_reason == "user_denied") {
 					console.log("user denied access to the application");
@@ -26,7 +26,7 @@ angular.module('DeezerAngularJS')
 					);
 				}
 
-					
+
 			}
 
 			$scope.start();
