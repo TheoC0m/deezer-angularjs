@@ -3,20 +3,6 @@ angular.module('DeezerAngularJS')
 		function($scope, $location, $routeParams, $timeout, $mdSidenav, $log, DeezerService, UserService) {
 
 
-
-
-			$scope.deezerLogin = function() {
-				DeezerService.deezerLogin();
-				$scope.connected = DeezerService.isConnected();
-				console.log("nav afeter login click connected : " + $scope.connected);
-			}
-			$scope.deezerLogout = function() {
-				DeezerService.deezerLogout();
-				$scope.connected = DeezerService.isConnected();
-				console.log("nav after logout click connected : : " + $scope.connected);
-			}
-
-
 			$scope.toggleLeft = buildDelayedToggler('left');
 
 			$scope.closeSideNav = function() {
@@ -53,6 +39,17 @@ angular.module('DeezerAngularJS')
 				};
 			}
 
+			$scope.deezerLogin = function() {
+				DeezerService.deezerLogin();
+				$scope.connected = DeezerService.isConnected();
+				console.log("nav afeter login click connected : " + $scope.connected);
+			}
+			$scope.deezerLogout = function() {
+				DeezerService.deezerLogout();
+				$scope.connected = DeezerService.isConnected();
+				console.log("nav after logout click connected : : " + $scope.connected);
+			}
+
 
 			$scope.afterLogin = function() {
 
@@ -81,12 +78,16 @@ angular.module('DeezerAngularJS')
 
 			$scope.start = function() {
 
+				//Boolean used to display either login or logout buttons and some other stuff
 				$scope.connected = DeezerService.isConnected();
-				$scope.userInfos;
+				//get user inofs from local storage (if it exists)
+				$scope.userInfos = JSON.parse(localStorage.getItem('deezer-user_infos'));
+
+				console.log($scope.userInfos);
 
 				//if current url has an hash with access_token
 				if ($location.hash().startsWith("access_token=")) {
-					$scope.afterLogin
+					$scope.afterLogin();
 					// clear url
 					$location.url($location.path('/'));
 				}

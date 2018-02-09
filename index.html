@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<base href="http://127.0.0.1/deezer-angularjs/">
+	<base href="/deezer-angularjs/">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 	<title>The WiW - Deezer AngularJS</title>
 	<script src="node_modules/angular/angular.js"></script>
@@ -31,7 +31,7 @@
 
 	<div ng-controller="MainController as ctrl" layout="column" ng-cloak>
 
-		<md-toolbar>
+		<md-toolbar md-whiteframe="6">
 			<div class="md-toolbar-tools">
 				<md-button hide-gt-xs class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()">
 					<md-icon md-svg-icon="assets/images/menu.svg"></md-icon>
@@ -42,8 +42,12 @@
 				<h1 md-troncate>The WiW Deezer</h1>
 				<div flex></div>
 
-				</span ng-controller="DeezerFactory as ctrl">
 
+				<span>
+				 <md-button ng-show="connected" hide-xs ng-disabled="true" style="color:#dedede" >{{userInfos.email}}</md-button>
+			 	</span>
+
+				<span>
 				<md-button ng-hide="connected" class="md-raised md-primary" ng-click="deezerLogin()">Login with Deezer</md-button>
 				<md-button ng-show="connected" class="md-raised md-primary" ng-click="deezerLogout()">Logout Deezer</md-button>
 				</span>
@@ -53,11 +57,11 @@
 
 		<section layout="row" flex>
 
-			<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+			<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="6">
 
 				<md-toolbar>
 					<div class="md-toolbar-tools">
-						<h2 md-truncate flex>Sidenav Left</h2>
+						<h2>Sidenav Left</h2>
 
 						<span flex></span>
 
@@ -78,19 +82,9 @@
 
 			</md-sidenav>
 
-			<md-content flex layout-padding>
+			<md-content layout="column" layout-margin layout-fill>
 
-				<div layout="column" layout-sm="column" layout-align="center stretch" layout-wrap>
-
-
-					<ng-view></ng-view>
-
-
-
-				</div>
-
-
-
+				<ng-view></ng-view>
 			</md-content>
 
 			<!-- <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
