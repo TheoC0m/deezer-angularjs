@@ -1,4 +1,4 @@
-var app = angular.module('DeezerAngularJS', ['ngRoute', 'ngMaterial', 'ngResource']);
+var app = angular.module('DeezerAngularJS', ['ngRoute', 'ngMaterial', 'ngResource', 'md.data.table']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider

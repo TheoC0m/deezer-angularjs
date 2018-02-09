@@ -1,5 +1,5 @@
 angular.module('DeezerAngularJS')
-	.controller('HomeController', ['$scope', '$location', '$routeParams', '$mdDialog', 'DeezerService', 'UserService',
+	.controller('HomeController', ['$scope', '$location', '$routeParams', '$mdDialog', 'DeezerService', 'MyUserService',
 		function($scope, $location, $routeParams, $mdDialog, DeezerService, UserService) {
 
 
