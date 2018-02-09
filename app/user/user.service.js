@@ -1,9 +1,10 @@
 angular.module("DeezerAngularJS")
-	.service("UserService", ["$http", 'DeezerService', function($http, DeezerService) {
+	.service("MyUserService", ["$http", 'DeezerService', function($http, DeezerService) {
+		//the service is named MyUserService instead of UserService because 'UserService' was causing a bug
 
-		var service = {};
+		// var service = {};
 
-		service.getMe = function(pageNumber) {
+	this.getMe = function() {
 			return $http({
 					method: "GET",
 					url: DeezerService.apiUrl + '/user/me' + '?output=json&access_token=' + localStorage.getItem('deezer-access_token')
@@ -21,5 +22,7 @@ angular.module("DeezerAngularJS")
 		}
 
 
-		return service;
+
+
+		// return service;
 	}])

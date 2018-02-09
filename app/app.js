@@ -7,6 +7,16 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			controller: 'HomeController'
 
 		})
+		.when('/playlist', {
+			templateUrl: 'app/playlist/playlist.html',
+			controller: 'PlaylistController'
+
+		})
+		.when('/playlist/:playlistId', {
+			templateUrl: 'app/playlist/playlist.html',
+			controller: 'PlaylistController'
+
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

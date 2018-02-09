@@ -1,6 +1,6 @@
 angular.module('DeezerAngularJS')
-	.controller('MainController', ['$scope', '$location', '$routeParams', '$timeout', '$mdSidenav', '$log', 'DeezerService', 'UserService',
-		function($scope, $location, $routeParams, $timeout, $mdSidenav, $log, DeezerService, UserService) {
+	.controller('MainController', ['$scope', '$location', '$routeParams', '$timeout', '$mdSidenav', '$log', 'DeezerService', 'MyUserService',
+		function($scope, $location, $routeParams, $timeout, $mdSidenav, $log, DeezerService, MyUserService) {
 
 
 			$scope.toggleLeft = buildDelayedToggler('left');
@@ -64,8 +64,10 @@ angular.module('DeezerAngularJS')
 
 			}
 
+
+
 			$scope.storeMe = function() {
-				UserService.getMe()
+				MyUserService.getMe()
 					.then(function(response) {
 						if (response != undefined) {
 							$scope.userInfos = response;
@@ -88,7 +90,7 @@ angular.module('DeezerAngularJS')
 				//if current url has an hash with access_token
 				if ($location.hash().startsWith("access_token=")) {
 					$scope.afterLogin();
-					// clear url
+					// clear url (remove access token uri fragment)
 					$location.url($location.path('/'));
 				}
 			}
