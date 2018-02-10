@@ -1,5 +1,5 @@
 angular.module('DeezerAngularJS')
-	.controller('PlaylistController', ['$scope', '$location', '$routeParams', 'PlaylistService',
+	.controller('PlaylistController', ['$scope', '$location', '$routeParams', 'PlaylistService', 
 		function($scope, $location, $routeParams, PlaylistService) {
 
 

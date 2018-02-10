@@ -5,7 +5,7 @@
 
 	<md-toolbar class="md-primary md-hue-1" layout="row">
 		<h2 class="md-toolbar-tools">
-      	Playlists
+      	Playlist
     	</h2>
 	</md-toolbar>
 
@@ -16,8 +16,9 @@
 				<thead md-head>
 					<tr md-row>
 						<th md-column><span>Picture</span></th>
-						<th md-column><span>Name</span></th>
-						<th md-column><span>Public</span></th>
+						<th md-column><span>Title</span></th>
+						<th md-column><span>Tracks</span></th>
+						<th md-column md-numeric><span>Public</span></th>
 					</tr>
 				</thead>
 				<tbody md-body>
@@ -25,8 +26,13 @@
 						<td md-cell>
 							<img src="{{playlist.picture_small}}" alt="playlist picture">
 						</td>
+
 						<td md-cell>
-							<md-button md-no-ink class="md-primary" href="playlist/{{playlist.id}}">{{playlist.title}}</md-button>
+							<md-button md-no-ink class="md-primary" href="playlist/{{playlist.id}}">{{playlist.title | limitTo: 20}}{{playlist.title.length > 20 ? '&hellip;' : ''}}</md-button>
+						</td>
+
+						<td md-cell style="color: rgb(63,81,181);">
+							{{playlist.nb_tracks}}
 						</td>
 						<td md-cell>
 
@@ -48,7 +54,7 @@
 
 	</div>
 
-	<div ng-show="playlist" layout-xs="column" layout="column" ng-cloak>
+	<md-content ng-show="playlist" layout-xs="column" layout="column" ng-cloak>
 
 
 
@@ -57,7 +63,7 @@
 
 
 		<md-card flex>
-			<md-card-title>
+			<md-card-title layout-align="center center">
 				<md-card-title-media class="md-padding">
 					<div class="md-media-xl card-media">
 						<img ng-src="{{playlist.picture_medium}}" alt="playlist image">
@@ -88,7 +94,7 @@
 			<table md-table>
 				<thead md-head>
 					<tr md-row>
-						<th md-column><span>Name</span></th>
+						<th md-column><span>Title</span></th>
 						<th md-column><span>Album</span></th>
 						<th md-column><span>Artist</span></th>
 					</tr>
@@ -96,13 +102,13 @@
 				<tbody md-body>
 					<tr md-row ng-repeat="song in playlist.tracks.data track by $index">
 						<td md-cell>
-							<md-button md-no-ink class="md-primary" >{{song.title}}</md-button>
+							<md-button md-no-ink class="md-primary">{{song.title | limitTo: 25}}{{song.title.length > 20 ? '&hellip;' : ''}}</md-button>
 						</td>
 						<td md-cell>
-							<md-button md-no-ink class="md-primary">{{song.album.title}}</md-button>
+							<md-button md-no-ink class="md-primary">{{song.album.title | limitTo: 20}}{{song.album.title.length > 20 ? '&hellip;' : ''}}</md-button>
 						</td>
 						<td md-cell>
-							<md-button md-no-ink class="md-primary">{{song.artist.name}}</md-button>
+							<md-button md-no-ink class="md-primary">{{song.artist.name | limitTo: 20}}{{song.artist.name.length > 20 ? '&hellip;' : ''}}</md-button>
 						</td>
 
 					</tr>
@@ -115,7 +121,7 @@
 
 
 
-	</div>
+	</md-content>
 
 
 
