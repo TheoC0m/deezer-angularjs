@@ -32,6 +32,7 @@ angular.module('DeezerAngularJS')
 			$scope.start = function() {
 				$scope.userPlaylists = null;
 				$scope.playlist = null;
+				$scope.textSearched = undefined;
 
 
 

@@ -11,20 +11,14 @@
 			</md-button>
 		</div>
 
-		<!-- <div class="md-toolbar-tools" flex="15" hide-xs>
-			Playlist
-		</div> -->
-
 		<div class="md-toolbar-tools" flex="80">
 			<md-icon md-svg-icon="assets/images/ic_search_white_24px.svg" flex></md-icon>
 
 			<md-input-container class="md-toolbar-tools">
 				<label>Search</label>
-				<input ng-model="search.who" placeholder="Search">
+				<input ng-model="textSearched" placeholder="Search">
 			</md-input-container>
 		</div>
-
-		<!-- <div class="md-toolbar-tools"></div> -->
 
 	</md-toolbar>
 
@@ -44,7 +38,7 @@
 						</tr>
 					</thead>
 					<tbody md-body>
-						<tr md-row ng-repeat="playlist in userPlaylists.data track by $index">
+						<tr md-row ng-repeat="playlist in userPlaylists.data | filter:textSearched">
 							<td md-cell>
 								<img src="{{playlist.picture_small}}" alt="playlist picture">
 							</td>
@@ -114,7 +108,7 @@
 						</tr>
 					</thead>
 					<tbody md-body>
-						<tr md-row ng-repeat="song in playlist.tracks.data track by $index">
+						<tr md-row ng-repeat="song in playlist.tracks.data | filter:textSearched">
 							<td md-cell>
 								<md-button md-no-ink class="md-primary">{{song.title | limitTo: 25}}{{song.title.length > 20 ? '&hellip;' : ''}}</md-button>
 							</td>
