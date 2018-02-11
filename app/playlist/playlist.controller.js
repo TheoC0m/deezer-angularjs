@@ -4,23 +4,25 @@ angular.module('DeezerAngularJS')
 
 
 			$scope.getUserPlaylists = function() {
+				$scope.loading = true;
 				PlaylistService.getUserPlaylists().then(function(response) {
 					if (response != undefined) {
 						$scope.userPlaylists = response;
 						console.log($scope.userPlaylists);
 					}
-					$scope.loaded = true;
+					$scope.loading = false;
 				})
 			}
 
 
 			$scope.getPlaylist = function(playlistId) {
+				$scope.loading = true;
 				PlaylistService.getPlaylist(playlistId).then(function(response) {
 					if (response != undefined) {
 						$scope.playlist = response;
 						console.log($scope.playlist);
 					}
-					$scope.loaded = true;
+					$scope.loading = false;
 				})
 			}
 
@@ -33,6 +35,7 @@ angular.module('DeezerAngularJS')
 				$scope.userPlaylists = null;
 				$scope.playlist = null;
 				$scope.textSearched = undefined;
+				$scope.loading = true;
 
 
 
