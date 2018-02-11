@@ -47,6 +47,8 @@ angular.module('DeezerAngularJS')
 			$scope.deezerLogout = function() {
 				DeezerService.deezerLogout();
 				$scope.connected = DeezerService.isConnected();
+				// clear url and redirect to the home page
+				$location.path('/');
 				console.log("nav after logout click connected : : " + $scope.connected);
 			}
 

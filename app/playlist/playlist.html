@@ -3,10 +3,23 @@
 
 
 
-	<md-toolbar class="md-primary md-hue-1" layout="row">
-		<h2 class="md-toolbar-tools">
+	<md-toolbar class="md-primary md-hue-1" layout="row" layout-align="space-around center">
+
+		<div class="md-toolbar-tools" flex="15" hide-xs>
       	Playlist
-    	</h2>
+	</div>
+
+		<div class="md-toolbar-tools" flex>
+			<md-icon md-svg-icon="assets/images/ic_search_white_24px.svg"></md-icon>
+
+		<md-input-container class="md-toolbar-tools" >
+			<label>Search</label>
+			<input ng-model="search.who" placeholder="Search">
+		</md-input-container>
+		</div>
+
+		<!-- <div class="md-toolbar-tools"></div> -->
+
 	</md-toolbar>
 
 	<div ng-show="userPlaylists">

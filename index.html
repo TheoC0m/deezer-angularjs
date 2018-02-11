@@ -48,9 +48,7 @@
 				<div flex></div>
 
 
-				<span>
-				 <md-button ng-show="connected" hide-xs ng-disabled="true" style="color:#dedede" >{{userInfos.email}}</md-button>
-			 	</span>
+
 
 				<span>
 				<md-button ng-hide="connected" class="md-raised md-primary" ng-click="deezerLogin()">Login with Deezer</md-button>
@@ -64,37 +62,46 @@
 
 			<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="6">
 
-				<md-toolbar layout="row" >
-					<div class="md-toolbar-tools">
-						<h2><span>Navigation</span></h2>
+				<div layout="column">
 
-						<span flex></span>
 
-						<md-button hide-gt-xs class="md-icon-button" aria-label="Close" ng-click="closeSideNav()">
-							<md-icon md-svg-icon="assets/images/ic_close_white_24px.svg"></md-icon>
+					<md-toolbar>
+						<div class="md-toolbar-tools">
+							<h2><span>Navigation</span></h2>
+							<span flex></span>
+							<md-button hide-gt-xs class="md-icon-button" aria-label="Close" ng-click="closeSideNav()">
+								<md-icon md-svg-icon="assets/images/ic_close_white_24px.svg"></md-icon>
+							</md-button>
+
+						</div>
+
+						<div class="md-toolbar-tools" ng-show="connected" layout="row" layout-align="start center">
+							<img class="md-media-lg card-media" src="{{userInfos.picture_small}}" alt="">
+							<span flex></span>
+							<span class="md-caption" md-truncate ng-disabled="true" style="color:#dedede">{{userInfos.email}}</span>
+
+						</div>
+					</md-toolbar>
+
+					<md-content layout-padding>
+
+						<md-button class="md-button md-ink-ripple" href="./" ng-click="closeSideNav()">
+							<md-icon md-svg-icon="assets/images/ic_home_black_24px.svg"></md-icon>
+							Home
 						</md-button>
-					</div>
-				</md-toolbar>
 
-				<md-content  layout-padding>
+						<md-divider></md-divider>
 
-					<md-button class="md-button md-ink-ripple" href="./" ng-click="closeSideNav()">
-						<md-icon md-svg-icon="assets/images/ic_home_black_24px.svg"></md-icon>
-						Home
-					</md-button>
-
-					<md-divider></md-divider>
-
-					<md-button class="md-button md-ink-ripple" href="playlist" ng-click="closeSideNav()">
-						<md-icon md-svg-icon="assets/images/ic_library_music_black_24px.svg"></md-icon>
-						Playlists
-					</md-button>
+						<md-button class="md-button md-ink-ripple" href="playlist" ng-click="closeSideNav()" ng-disabled="!connected">
+							<md-icon md-svg-icon="assets/images/ic_library_music_black_24px.svg"></md-icon>
+							Playlists
+						</md-button>
 
 
-					<md-divider></md-divider>
+						<md-divider></md-divider>
 
-				</md-content>
-
+					</md-content>
+				</div>
 			</md-sidenav>
 
 			<md-content layout="column" layout-fill>
