@@ -21,106 +21,63 @@
 	<script src="app/main/main.controller.js"></script>
 	<script src="app/playlist/playlist.controller.js"></script>
 	<script src="app/playlist/playlist.service.js"></script>
-
-
-
 	<link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css" />
 	<link rel="stylesheet" href="node_modules/angular-material-data-table/dist/md-data-table.min.css" />
 	<link rel="stylesheet" href="assets/css/custom.css" />
-
-
-
 </head>
 
 <body ng-app="DeezerAngularJS">
-
 	<div ng-controller="MainController as ctrl" layout="column" ng-cloak>
 
-		<md-toolbar md-whiteframe="6" class="md-primary">
-			<div class="md-toolbar-tools">
-				<md-button hide-gt-xs class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()">
-					<md-icon md-svg-icon="assets/images/menu.svg"></md-icon>
-				</md-button>
+		<div layout="row" flex>
 
-
-
-				<h1 md-troncate>The WiW Deezer</h1>
-				<div flex></div>
-
-
-
-
-				<span>
-				<md-button ng-hide="connected" class="md-raised md-primary" ng-click="deezerLogin()">Login with Deezer</md-button>
-				<md-button ng-show="connected" class="md-raised md-primary" ng-click="deezerLogout()">Logout Deezer</md-button>
-				</span>
-
-			</div>
-		</md-toolbar>
-
-		<section layout="row" flex>
-
-			<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="6">
-
-				<div layout="column">
-
-
-					<md-toolbar>
-						<div class="md-toolbar-tools">
-							<h2><span>Navigation</span></h2>
-							<span flex></span>
-							<md-button hide-gt-xs class="md-icon-button" aria-label="Close" ng-click="closeSideNav()">
-								<md-icon md-svg-icon="assets/images/ic_close_white_24px.svg"></md-icon>
-							</md-button>
-
-						</div>
-
-						<div class="md-toolbar-tools" ng-show="connected" layout="row" layout-align="start center">
-							<img class="md-media-lg card-media" src="{{userInfos.picture_small}}" alt="">
-							<span flex></span>
-							<span class="md-caption" md-truncate ng-disabled="true" style="color:#dedede">{{userInfos.email}}</span>
-
-						</div>
-					</md-toolbar>
-
-					<md-content layout-padding>
-
-						<md-button class="md-button md-ink-ripple" href="./" ng-click="closeSideNav()">
-							<md-icon md-svg-icon="assets/images/ic_home_black_24px.svg"></md-icon>
-							Home
+			<md-sidenav layout="column" class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="6">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2><span>Navigation</span></h2>
+						<span flex></span>
+						<md-button hide-gt-xs class="md-icon-button" aria-label="Close" ng-click="closeSideNav()">
+							<md-icon md-svg-icon="assets/images/ic_close_white_24px.svg"></md-icon>
 						</md-button>
-
-						<md-divider></md-divider>
-
-						<md-button class="md-button md-ink-ripple" href="playlist" ng-click="closeSideNav()" ng-disabled="!connected">
-							<md-icon md-svg-icon="assets/images/ic_library_music_black_24px.svg"></md-icon>
-							Playlists
-						</md-button>
-
-
-						<md-divider></md-divider>
-
-					</md-content>
-				</div>
+					</div>
+					<div class="md-toolbar-tools" ng-show="connected" layout="row" layout-align="start center">
+						<img class="md-media-lg card-media" src="{{userInfos.picture_small}}" alt="">	<span flex></span>
+						<span class="md-caption" md-truncate ng-disabled="true" style="color:#dedede">{{userInfos.email}}</span>
+					</div>
+				</md-toolbar>
+				<md-content layout-padding>
+					<md-button class="md-button md-ink-ripple" href="./" ng-click="closeSideNav()">
+						<md-icon md-svg-icon="assets/images/ic_home_black_24px.svg"></md-icon>Home</md-button>
+					<md-divider></md-divider>
+					<md-button class="md-button md-ink-ripple" href="playlist" ng-click="closeSideNav()" ng-disabled="!connected">
+						<md-icon md-svg-icon="assets/images/ic_library_music_black_24px.svg"></md-icon>Playlists</md-button>
+					<md-divider></md-divider>
+				</md-content>
 			</md-sidenav>
 
-			<md-content layout="column" layout-fill>
+			<div layout="column" flex >
 
-				<ng-view></ng-view>
-			</md-content>
+				<md-toolbar md-whiteframe="6" class="md-primary">
+					<div class="md-toolbar-tools">
+						<md-button hide-gt-xs class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()">
+							<md-icon md-svg-icon="assets/images/menu.svg"></md-icon>
+						</md-button>
+						<h1 md-troncate>The WiW Deezer</h1>
+						<div flex></div>	<span>
+					<md-button ng-hide="connected" class="md-raised md-primary" ng-click="deezerLogin()">Login with Deezer</md-button>
+					<md-button ng-show="connected" class="md-raised md-primary" ng-click="deezerLogout()">Logout Deezer</md-button>
+					</span>
+					</div>
+				</md-toolbar>
 
-		</section>
+				<!-- <div style=""> -->
+					<ng-view layout="column" flex ></ng-view>
+				<!-- </div> -->
 
+			</div>
+
+		</div>
 	</div>
-
-
-
-
-
-
-
-
-
 </body>
 
 </html>

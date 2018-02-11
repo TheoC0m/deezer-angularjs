@@ -1,142 +1,139 @@
-<div id="playlist_view">
+<div id="playlist_view" layout="column" flex>
 
 
 
 
-	<md-toolbar class="md-primary md-hue-1" layout="row" layout-align="space-around center">
-
-		<div class="md-toolbar-tools" flex="15" hide-xs>
-      	Playlist
-	</div>
+	<md-toolbar md-scroll-shrink class="md-primary md-hue-1" layout="row" >
 
 		<div class="md-toolbar-tools" flex>
-			<md-icon md-svg-icon="assets/images/ic_search_white_24px.svg"></md-icon>
+			<md-button class="md-fab md-mini md-primary md-hue-1" md-whiteframe="0" ng-click="previousPage()" >
+				<md-icon md-svg-icon="assets/images/ic_keyboard_backspace_white_24px.svg"></md-icon>
+			</md-button>
+		</div>
 
-		<md-input-container class="md-toolbar-tools" >
-			<label>Search</label>
-			<input ng-model="search.who" placeholder="Search">
-		</md-input-container>
+		<!-- <div class="md-toolbar-tools" flex="15" hide-xs>
+			Playlist
+		</div> -->
+
+		<div class="md-toolbar-tools" flex="80">
+			<md-icon md-svg-icon="assets/images/ic_search_white_24px.svg" flex></md-icon>
+
+			<md-input-container class="md-toolbar-tools">
+				<label>Search</label>
+				<input ng-model="search.who" placeholder="Search">
+			</md-input-container>
 		</div>
 
 		<!-- <div class="md-toolbar-tools"></div> -->
 
 	</md-toolbar>
 
-	<div ng-show="userPlaylists">
+	<!-- <md-content flex> -->
+	<div style="overflow-y:auto" flex>
 
-		<md-table-container>
-			<table md-table>
-				<thead md-head>
-					<tr md-row>
-						<th md-column><span>Picture</span></th>
-						<th md-column><span>Title</span></th>
-						<th md-column><span>Tracks</span></th>
-						<th md-column md-numeric><span>Public</span></th>
-					</tr>
-				</thead>
-				<tbody md-body>
-					<tr md-row ng-repeat="playlist in userPlaylists.data track by $index">
-						<td md-cell>
-							<img src="{{playlist.picture_small}}" alt="playlist picture">
-						</td>
+		<div ng-show="userPlaylists">
 
-						<td md-cell>
-							<md-button md-no-ink class="md-primary" href="playlist/{{playlist.id}}">{{playlist.title | limitTo: 20}}{{playlist.title.length > 20 ? '&hellip;' : ''}}</md-button>
-						</td>
+			<md-table-container>
+				<table md-table>
+					<thead md-head>
+						<tr md-row>
+							<th md-column><span>Picture</span></th>
+							<th md-column><span>Title</span></th>
+							<th md-column><span>Tracks</span></th>
+							<th md-column md-numeric><span>Public</span></th>
+						</tr>
+					</thead>
+					<tbody md-body>
+						<tr md-row ng-repeat="playlist in userPlaylists.data track by $index">
+							<td md-cell>
+								<img src="{{playlist.picture_small}}" alt="playlist picture">
+							</td>
 
-						<td md-cell style="color: rgb(63,81,181);">
-							{{playlist.nb_tracks}}
-						</td>
-						<td md-cell>
+							<td md-cell>
+								<md-button md-no-ink class="md-primary" href="playlist/{{playlist.id}}">{{playlist.title | limitTo: 20}}{{playlist.title.length > 20 ? '&hellip;' : ''}}</md-button>
+							</td>
 
-							<md-button ng-if="playlist.public" class="md-icon-button" aria-label="public" ng-disabled="true">
-								<md-icon md-svg-icon="assets/images/ic_visibility_black_24px.svg"></md-icon>
-								</md-icon>
-							</md-button>
+							<td md-cell style="color: rgb(63,81,181);">
+								{{playlist.nb_tracks}}
+							</td>
+							<td md-cell>
 
-
-							<md-button ng-if="!playlist.public" class="md-icon-button" aria-label="public" ng-disabled="true" ng-if="!playlist.public">
-								<md-icon md-svg-icon="assets/images/ic_visibility_off_black_24px.svg"></md-icon>
-								</md-icon>
-							</md-button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</md-table-container>
-
-	</div>
-
-	<md-content ng-show="playlist" layout-xs="column" layout="column" ng-cloak>
+								<md-button ng-if="playlist.public" class="md-icon-button" aria-label="public" ng-disabled="true">
+									<md-icon md-svg-icon="assets/images/ic_visibility_black_24px.svg"></md-icon>
+									</md-icon>
+								</md-button>
 
 
+								<md-button ng-if="!playlist.public" class="md-icon-button" aria-label="public" ng-disabled="true" ng-if="!playlist.public">
+									<md-icon md-svg-icon="assets/images/ic_visibility_off_black_24px.svg"></md-icon>
+									</md-icon>
+								</md-button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</md-table-container>
+
+		</div>
 
 
+		<div ng-show="playlist">
 
-
-
-		<md-card flex>
-			<md-card-title layout-align="center center">
-				<md-card-title-media class="md-padding">
-					<div class="md-media-xl card-media">
-						<img ng-src="{{playlist.picture_medium}}" alt="playlist image">
-					</div>
-				</md-card-title-media>
-				<md-card-title-text hide-xs>
-					<span class="md-headline">{{playlist.title}}</span>
-					<span class="md-subhead">{{playlist.description}}</span>
-				</md-card-title-text>
-			</md-card-title>
-			<md-card-content hide-gt-xs>
-				<p>{{playlist.title}}</p>
-				<p>{{playlist.description}}</p>
-			</md-card-content>
-			<!-- <md-card-actions layout="row" layout-align="end center">
+			<md-card flex>
+				<md-card-title layout-align="center center">
+					<md-card-title-media class="md-padding">
+						<div class="md-media-xl card-media">
+							<img ng-src="{{playlist.picture_medium}}" alt="playlist image">
+						</div>
+					</md-card-title-media>
+					<md-card-title-text hide-xs>
+						<span class="md-headline">{{playlist.title}}</span>
+						<span class="md-subhead">{{playlist.description}}</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-card-content hide-gt-xs>
+					<p>{{playlist.title}}</p>
+					<p>{{playlist.description}}</p>
+				</md-card-content>
+				<!-- <md-card-actions layout="row" layout-align="end center">
 				<md-button>Action 1</md-button>
 				<md-button>Action 2</md-button>
 			</md-card-actions> -->
-		</md-card>
+			</md-card>
 
 
 
 
+			<md-table-container>
+				<table md-table>
+					<thead md-head>
+						<tr md-row>
+							<th md-column><span>Title</span></th>
+							<th md-column><span>Album</span></th>
+							<th md-column><span>Artist</span></th>
+						</tr>
+					</thead>
+					<tbody md-body>
+						<tr md-row ng-repeat="song in playlist.tracks.data track by $index">
+							<td md-cell>
+								<md-button md-no-ink class="md-primary">{{song.title | limitTo: 25}}{{song.title.length > 20 ? '&hellip;' : ''}}</md-button>
+							</td>
+							<td md-cell>
+								<md-button md-no-ink class="md-primary">{{song.album.title | limitTo: 20}}{{song.album.title.length > 20 ? '&hellip;' : ''}}</md-button>
+							</td>
+							<td md-cell>
+								<md-button md-no-ink class="md-primary">{{song.artist.name | limitTo: 20}}{{song.artist.name.length > 20 ? '&hellip;' : ''}}</md-button>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</md-table-container>
 
 
-
-		<md-table-container>
-			<table md-table>
-				<thead md-head>
-					<tr md-row>
-						<th md-column><span>Title</span></th>
-						<th md-column><span>Album</span></th>
-						<th md-column><span>Artist</span></th>
-					</tr>
-				</thead>
-				<tbody md-body>
-					<tr md-row ng-repeat="song in playlist.tracks.data track by $index">
-						<td md-cell>
-							<md-button md-no-ink class="md-primary">{{song.title | limitTo: 25}}{{song.title.length > 20 ? '&hellip;' : ''}}</md-button>
-						</td>
-						<td md-cell>
-							<md-button md-no-ink class="md-primary">{{song.album.title | limitTo: 20}}{{song.album.title.length > 20 ? '&hellip;' : ''}}</md-button>
-						</td>
-						<td md-cell>
-							<md-button md-no-ink class="md-primary">{{song.artist.name | limitTo: 20}}{{song.artist.name.length > 20 ? '&hellip;' : ''}}</md-button>
-						</td>
-
-					</tr>
-				</tbody>
-			</table>
-		</md-table-container>
+		</div>
 
 
-
-
-
-
-	</md-content>
-
-
-
-
+		<!-- </md-content> -->
+	</div>
 </div>

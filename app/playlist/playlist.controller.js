@@ -1,5 +1,5 @@
 angular.module('DeezerAngularJS')
-	.controller('PlaylistController', ['$scope', '$location', '$routeParams', 'PlaylistService', 
+	.controller('PlaylistController', ['$scope', '$location', '$routeParams', 'PlaylistService',
 		function($scope, $location, $routeParams, PlaylistService) {
 
 
@@ -22,6 +22,10 @@ angular.module('DeezerAngularJS')
 					}
 					$scope.loaded = true;
 				})
+			}
+
+			$scope.previousPage = function(){
+				window.history.back();
 			}
 
 
