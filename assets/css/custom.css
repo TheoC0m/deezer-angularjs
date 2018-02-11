@@ -9,12 +9,12 @@ body {
 
 
 
-#playlist_view md-input-container:not(.md-input-invalid) .md-input {
+#playlist_view  #playlist-toolbar md-input-container:not(.md-input-invalid) .md-input {
     color: white !important;
 	border-color: white !important;
 }
 
-#playlist_view md-input-container:not(.md-input-invalid) label {
+#playlist_view #playlist-toolbar md-input-container:not(.md-input-invalid) label {
     display: none;
 }
 

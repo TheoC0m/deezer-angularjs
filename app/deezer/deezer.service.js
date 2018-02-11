@@ -3,7 +3,7 @@ angular.module("DeezerAngularJS")
 
 		var service = {};
 
-		service.appID = "270062";
+		service.appID = "270562"
 
 		service.redirectURI = "http://127.0.0.1/deezer-angularjs/";
 

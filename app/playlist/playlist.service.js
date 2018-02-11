@@ -39,6 +39,23 @@ angular.module("DeezerAngularJS")
 				})
 		}
 
+		service.addUserPlaylist = function(title) {
+			return $http({
+					method: "POST",
+					url: DeezerService.apiUrl + '/user/me/playlists/?title=' + title + '&output=json&access_token=' + localStorage.getItem('deezer-access_token')
+				})
+				.then(function(response) {
+
+					//console.log(response);
+					var data = response.data;
+					//console.log(data);
+					return data;
+				})
+				.catch(function() {
+					return undefined;
+				})
+		}
+
 
 
 
