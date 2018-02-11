@@ -3,21 +3,29 @@
 
 
 
-	<md-toolbar md-scroll-shrink class="md-primary md-hue-1" layout="row" >
+	<md-toolbar md-scroll-shrink class="md-primary md-hue-1" layout="row" layout-align="space-between center" >
 
-		<div class="md-toolbar-tools" flex>
+		<div class="md-toolbar-tools" flex="25" layout-align="start center">
 			<md-button class="md-fab md-mini md-primary md-hue-1" md-whiteframe="0" ng-click="previousPage()" >
 				<md-icon md-svg-icon="assets/images/ic_keyboard_backspace_white_24px.svg"></md-icon>
 			</md-button>
 		</div>
 
-		<div class="md-toolbar-tools" flex="80">
+		<div class="md-toolbar-tools" flex="50">
 			<md-icon md-svg-icon="assets/images/ic_search_white_24px.svg" flex></md-icon>
 
 			<md-input-container class="md-toolbar-tools">
 				<label>Search</label>
 				<input ng-model="textSearched" placeholder="Search">
 			</md-input-container>
+		</div>
+
+		<span flex></span>
+		<div class="md-toolbar-tools" flex="25" layout-align="end center">
+			<!-- <span hide-xs flex></span> -->
+			<md-button class="md-fab md-mini md-accent md-hue-1" md-whiteframe="0" ng-click="addPlaylist()">
+				<md-icon md-svg-icon="assets/images/ic_add_white_24px.svg"></md-icon>
+			</md-button>
 		</div>
 
 	</md-toolbar>
