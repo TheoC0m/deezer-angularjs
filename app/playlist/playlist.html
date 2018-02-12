@@ -47,7 +47,7 @@
 						</tr>
 					</thead>
 					<tbody md-body>
-						<tr md-row ng-repeat="playlist in userPlaylists.data | filter:textSearched">
+						<tr md-row ng-repeat="playlist in userPlaylists.data | filter: {title :textSearched}">
 							<td md-cell>
 								<img src="{{playlist.picture_small}}" alt="playlist picture">
 							</td>
@@ -117,7 +117,7 @@
 						</tr>
 					</thead>
 					<tbody md-body>
-						<tr md-row ng-repeat="song in playlist.tracks.data | filter:textSearched">
+						<tr md-row ng-repeat="song in playlist.tracks.data | filter: textSearched">
 							<td md-cell>
 								<md-button md-no-ink class="md-primary">{{song.title | limitTo: 25}}{{song.title.length > 20 ? '&hellip;' : ''}}</md-button>
 							</td>
