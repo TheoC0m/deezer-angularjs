@@ -9,21 +9,16 @@
 				</md-button>
 			</div>
 		</md-toolbar>
+		<md-progress-linear md-mode="query" ng-disabled="!loading"></md-progress-linear>
+
 
 		<md-dialog-content>
 			<div class="md-dialog-content" layout="column">
 
 				<md-input-container flex>
 					<label>Search a track</label>
-					<input ng-model="trackSearched" placeholder="Search a track" ng-change="searchTrack()">
+					<input ng-model="trackSearched" ng-model-options="{ debounce: 500 }" placeholder="Search a track" ng-change="searchTrack()">
 				</md-input-container>
-
-				<span>Selected track : {{selectedTrack}}</span>
-
-
-
-
-
 
 				<md-table-container>
 					<table md-table>
@@ -32,7 +27,7 @@
 								<th md-column><span>Title</span></th>
 								<th md-column><span>Artist</span></th>
 								<th md-column><span>Album</span></th>
-								<th md-column><span>Action</span></th>
+								<th md-column><span>Add</span></th>
 							</tr>
 						</thead>
 						<tbody md-body>
@@ -49,7 +44,7 @@
 									<md-button md-no-ink class="md-primary">{{song.album.title | limitTo: 20}}{{playlist.title.length > 20 ? '&hellip;' : ''}}</md-button>
 								</td>
 								<td md-cell>
-									<md-button md-no-ink class="md-primary">Select</md-button>
+									<md-checkbox ng-click="selectTrack(song)" aria-label="add"></md-checkbox>
 								</td>
 							</tr>
 						</tbody>
@@ -66,10 +61,10 @@
 
 		<md-dialog-actions layout="row">
 			<span flex></span>
-			<md-button ng-click="answer('cancel')">
+			<md-button ng-click="cancel()">
 				Cancel
 			</md-button>
-			<md-button ng-click="answer('add the song !')">
+			<md-button ng-click="add(selectedTracks)" ng-disabled="selectedTracks.length == 0">
 				Add the selected song
 			</md-button>
 		</md-dialog-actions>

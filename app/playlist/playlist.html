@@ -23,7 +23,7 @@
 		<span flex></span>
 		<div class="md-toolbar-tools" flex="25" layout-align="end center">
 			<!-- <span hide-xs flex></span> -->
-			<md-button class="md-fab md-mini md-accent md-hue-1" md-whiteframe="0" ng-click="addPlaylistDialog($event)">
+			<md-button class="md-fab md-mini md-accent md-hue-1" md-whiteframe="0" ng-click="addPlaylistDialog($event)" ng-disabled="playlist && !(playlist.creator.id == currentUserId)">
 				<md-icon md-svg-icon="assets/images/ic_add_white_24px.svg"></md-icon>
 			</md-button>
 		</div>
@@ -43,7 +43,7 @@
 							<th md-column><span>Picture</span></th>
 							<th md-column><span>Title</span></th>
 							<th md-column><span>Tracks</span></th>
-							<th md-column md-numeric><span>Public</span></th>
+							<th md-column md-numeric><span>Owner</span></th>
 						</tr>
 					</thead>
 					<tbody md-body>
@@ -61,15 +61,15 @@
 							</td>
 							<td md-cell>
 
-								<md-button ng-if="playlist.public" class="md-icon-button" aria-label="public" ng-disabled="true">
-									<md-icon md-svg-icon="assets/images/ic_visibility_black_24px.svg"></md-icon>
-									</md-icon>
+								<md-button ng-if="playlist.creator.id == currentUserId" class="md-button" aria-label="me" ng-disabled="true">
+									<!-- <md-icon md-svg-icon="assets/images/ic_visibility_black_24px.svg"></md-icon> -->
+									Me
 								</md-button>
 
 
-								<md-button ng-if="!playlist.public" class="md-icon-button" aria-label="public" ng-disabled="true" ng-if="!playlist.public">
-									<md-icon md-svg-icon="assets/images/ic_visibility_off_black_24px.svg"></md-icon>
-									</md-icon>
+								<md-button ng-if="playlist.creator.id != currentUserId" class="md-button" aria-label="other" ng-disabled="true" ng-if="!playlist.public">
+									<!-- <md-icon md-svg-icon="assets/images/ic_visibility_off_black_24px.svg"></md-icon> -->
+									{{playlist.creator.name | limitTo: 5}}{{playlist.title.length > 5 ? '&hellip;' : ''}}
 								</md-button>
 							</td>
 						</tr>

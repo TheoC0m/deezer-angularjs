@@ -44,12 +44,33 @@ angular.module('DeezerAngularJS')
 				})
 			}
 
+			$scope.addSongsToPlaylist = function(tracks) {
+				$scope.loading = true;
+				PlaylistService.addSongsToPlaylist(tracks, $scope.playlistId).then(function(response) {
+					if (response != undefined) {
+						//$scope.playlist = response;
+						console.log(response);
+						$mdToast.show(
+							$mdToast.simple()
+							.position('top left')
+							.textContent('Song(s) added to the playlist')
+							.hideDelay(3000)
+						);
+					}
+					$scope.loading = false;
+
+					$scope.getPlaylist($scope.playlistId);
+				})
+
+			}
+
 
 
 
 
 			$scope.addPlaylistDialog = function(ev) {
 
+				//if this is the general playlists list view
 				if ($scope.userPlaylists && !$scope.playlist) {
 
 					var confirm = $mdDialog.prompt()
@@ -75,70 +96,38 @@ angular.module('DeezerAngularJS')
 					});
 
 				}
+				// if this is a specific playlist view
 				if (!$scope.userPlaylists && $scope.playlist) {
 
-
-					$mdDialog.show({
-							controller: 'DialogAddSongController',
-							templateUrl: 'app/playlist/dialogAddSong.tmpl.html',
-							parent: angular.element(document.body),
-							targetEvent: ev,
-							clickOutsideToClose: true,
-							fullscreen: true,
-							// locals: {
-							// 	trackSearched: DialogAddSongController.trackSearched,
-							// 	selectedTrack: DialogAddSongController.selectedTrack,
-							// 	searchTrack: DialogAddSongController.searchTrack,
-							// 	foundTracks: DialogAddSongController.foundTracks
-							// },
-							// bindToController: true
-						})
-						.then(function(answer) {
-							console.log('You said the information was "' + answer + '".');
-						}, function() {
-							console.log('You cancelled the dialog.');
-						});
+					//if playlist's creator is not the current user
+					if ($scope.playlist.creator.id != $scope.currentUserId) {
+						$mdToast.show(
+							$mdToast.simple()
+							.textContent("Can't add songs to other user's playlists")
+							.hideDelay(3000)
+						);
+					} else {
 
 
+						$mdDialog.show({
+								controller: 'DialogAddSongController',
+								templateUrl: 'app/playlist/dialogAddSong.tmpl.html',
+								parent: angular.element(document.body),
+								targetEvent: ev,
+								clickOutsideToClose: true,
+								fullscreen: true,
+							})
+							.then(function(tracks) {
+								console.log('You added song : ' + tracks);
+								$scope.addSongsToPlaylist(tracks);
+							}, function() {
+								console.log('You cancelled the dialog.');
+							});
+
+
+					}
 				}
 			};
-
-			// function DialogController($scope, $mdDialog) {
-			//
-			// 	$scope.start = function() {
-			// 		$scope.trackSearched = undefined;
-			// 		$scope.selectedTrack = undefined;
-			// 		$scope.foundTracks = undefined;
-			// 	}
-			//
-			//
-			// 	$scope.hide = function() {
-			// 		$mdDialog.hide();
-			// 	};
-			//
-			// 	$scope.cancel = function() {
-			// 		$mdDialog.cancel();
-			// 	};
-			//
-			// 	$scope.answer = function(answer) {
-			// 		$mdDialog.hide(answer);
-			// 	};
-			//
-			//
-			// 	$scope.searchTrack = function() {
-			// 		$scope.loading = true;
-			// 		PlaylistService.searchTrack($scope.trackSearched).then(function(response) {
-			// 			if (response != undefined) {
-			// 				//$scope.playlist = response;
-			// 				console.log(response);
-			// 				$scope.foundTracks = response
-			// 			}
-			// 			$scope.loading = false;
-			// 			// $scope.getUserPlaylists();
-			// 		})
-			// 	}
-			// }
-
 
 
 			$scope.previousPage = function() {
@@ -147,11 +136,13 @@ angular.module('DeezerAngularJS')
 
 
 			$scope.start = function() {
+				$scope.playlistId = null;
 				$scope.userPlaylists = null;
 				$scope.playlist = null;
 				$scope.textSearched = undefined;
 				$scope.loading = true;
 				$scope.customFullscreen = false;
+				$scope.currentUserId = angular.fromJson(localStorage.getItem('deezer-user_infos')).id;
 
 
 
@@ -159,8 +150,8 @@ angular.module('DeezerAngularJS')
 
 				if ($routeParams.playlistId) {
 					console.log($routeParams.playlistId);
-
-					$scope.getPlaylist($routeParams.playlistId);
+					$scope.playlistId = $routeParams.playlistId;
+					$scope.getPlaylist($scope.playlistId);
 
 				} else {
 

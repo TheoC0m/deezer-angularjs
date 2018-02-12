@@ -10,8 +10,9 @@ angular.module('DeezerAngularJS')
 			$mdDialog.cancel();
 		};
 
-		$scope.answer = function(answer) {
-			// $mdDialog.hide(answer);
+		$scope.add = function(tracks) {
+
+			$mdDialog.hide(tracks);
 		};
 
 
@@ -28,10 +29,29 @@ angular.module('DeezerAngularJS')
 			})
 		}
 
+
+		$scope.selectTrack = function(song){
+			//check if song exists in the array
+			var index = $scope.selectedTracks.indexOf(song.id);
+			if(index != -1){
+				//if song is in the Array : remove it
+				 $scope.selectedTracks.splice(index, 1);
+			}
+			else{
+				//else : add it
+				$scope.selectedTracks.push(song.id);
+			}
+
+			console.log($scope.selectedTracks);
+
+
+		}
+
 		$scope.start = function() {
 			$scope.trackSearched = undefined;
-			$scope.selectedTrack = undefined;
+			$scope.selectedTracks = new Array();
 			$scope.foundTracks = undefined;
+			$scope.loading = false;
 		}
 
 		$scope.start();
