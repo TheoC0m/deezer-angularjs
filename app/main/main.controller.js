@@ -1,6 +1,6 @@
 angular.module('DeezerAngularJS')
-	.controller('MainController', ['$scope', '$location', '$routeParams', '$timeout', '$mdSidenav', '$log', 'DeezerService', 'MyUserService',
-		function($scope, $location, $routeParams, $timeout, $mdSidenav, $log, DeezerService, MyUserService) {
+	.controller('MainController', ['$scope', '$location', '$routeParams', '$timeout', '$mdSidenav', '$log', 'DeezerService', 'MyUserService', '$mdToast',
+		function($scope, $location, $routeParams, $timeout, $mdSidenav, $log, DeezerService, MyUserService, $mdToast) {
 
 
 			$scope.toggleLeft = buildDelayedToggler('left');
@@ -50,6 +50,12 @@ angular.module('DeezerAngularJS')
 				// clear url and redirect to the home page
 				$location.path('/');
 				console.log("nav after logout click connected : : " + $scope.connected);
+				$mdToast.show(
+					$mdToast.simple()
+					.position('top left')
+					.textContent('Logged out !')
+					.hideDelay(1500)
+				);
 			}
 
 
@@ -63,7 +69,12 @@ angular.module('DeezerAngularJS')
 
 				// store user informations for an easyer access  everywhere (only one request needed)
 				$scope.storeMe()
-
+				$mdToast.show(
+					$mdToast.simple()
+					.position('top left')
+					.textContent('Successfully logged in !')
+					.hideDelay(1500)
+				);
 			}
 
 

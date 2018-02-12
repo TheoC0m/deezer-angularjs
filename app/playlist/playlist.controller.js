@@ -1,6 +1,6 @@
 angular.module('DeezerAngularJS')
-	.controller('PlaylistController', ['$scope', '$location', '$routeParams', 'PlaylistService', '$mdDialog',
-		function($scope, $location, $routeParams, PlaylistService, $mdDialog, ) {
+	.controller('PlaylistController', ['$scope', '$location', '$routeParams', 'PlaylistService', '$mdDialog', '$mdToast',
+		function($scope, $location, $routeParams, PlaylistService, $mdDialog, $mdToast) {
 
 
 			$scope.getUserPlaylists = function() {
@@ -34,6 +34,12 @@ angular.module('DeezerAngularJS')
 						console.log(response);
 					}
 					$scope.loading = false;
+					$mdToast.show(
+						$mdToast.simple()
+						.position('top left')
+						.textContent('Playlist added')
+						.hideDelay(3000)
+					);
 					$scope.getUserPlaylists();
 				})
 			}
@@ -61,7 +67,11 @@ angular.module('DeezerAngularJS')
 						//$scope.status = 'You decided to name your dog ' + result + '.';
 						$scope.addUserPlaylist(result);
 					}, function() {
-
+						$mdToast.show(
+							$mdToast.simple()
+							.textContent('cancelled')
+							.hideDelay(3000)
+						);
 					});
 
 				}
@@ -69,19 +79,19 @@ angular.module('DeezerAngularJS')
 
 
 					$mdDialog.show({
-							controller: DialogController,
+							controller: 'DialogAddSongController',
 							templateUrl: 'app/playlist/dialogAddSong.tmpl.html',
 							parent: angular.element(document.body),
 							targetEvent: ev,
 							clickOutsideToClose: true,
 							fullscreen: true,
-							locals: {
-								trackSearched: DialogController.trackSearched,
-								selectedTrack: DialogController.selectedTrack,
-								searchTrack: DialogController.searchTrack,
-								foundTracks: DialogController.foundTracks
-							},
-							bindToController: true
+							// locals: {
+							// 	trackSearched: DialogAddSongController.trackSearched,
+							// 	selectedTrack: DialogAddSongController.selectedTrack,
+							// 	searchTrack: DialogAddSongController.searchTrack,
+							// 	foundTracks: DialogAddSongController.foundTracks
+							// },
+							// bindToController: true
 						})
 						.then(function(answer) {
 							console.log('You said the information was "' + answer + '".');
@@ -93,41 +103,41 @@ angular.module('DeezerAngularJS')
 				}
 			};
 
-			function DialogController($scope, $mdDialog) {
-
-				$scope.start = function() {
-					$scope.trackSearched = undefined;
-					$scope.selectedTrack = undefined;
-					$scope.foundTracks = undefined;
-				}
-
-
-				$scope.hide = function() {
-					$mdDialog.hide();
-				};
-
-				$scope.cancel = function() {
-					$mdDialog.cancel();
-				};
-
-				$scope.answer = function(answer) {
-					$mdDialog.hide(answer);
-				};
-
-
-				$scope.searchTrack = function() {
-					$scope.loading = true;
-					PlaylistService.searchTrack($scope.trackSearched).then(function(response) {
-						if (response != undefined) {
-							//$scope.playlist = response;
-							console.log(response);
-							$scope.foundTracks = response
-						}
-						$scope.loading = false;
-						// $scope.getUserPlaylists();
-					})
-				}
-			}
+			// function DialogController($scope, $mdDialog) {
+			//
+			// 	$scope.start = function() {
+			// 		$scope.trackSearched = undefined;
+			// 		$scope.selectedTrack = undefined;
+			// 		$scope.foundTracks = undefined;
+			// 	}
+			//
+			//
+			// 	$scope.hide = function() {
+			// 		$mdDialog.hide();
+			// 	};
+			//
+			// 	$scope.cancel = function() {
+			// 		$mdDialog.cancel();
+			// 	};
+			//
+			// 	$scope.answer = function(answer) {
+			// 		$mdDialog.hide(answer);
+			// 	};
+			//
+			//
+			// 	$scope.searchTrack = function() {
+			// 		$scope.loading = true;
+			// 		PlaylistService.searchTrack($scope.trackSearched).then(function(response) {
+			// 			if (response != undefined) {
+			// 				//$scope.playlist = response;
+			// 				console.log(response);
+			// 				$scope.foundTracks = response
+			// 			}
+			// 			$scope.loading = false;
+			// 			// $scope.getUserPlaylists();
+			// 		})
+			// 	}
+			// }
 
 
 
